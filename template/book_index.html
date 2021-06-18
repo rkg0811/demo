@@ -19,7 +19,7 @@
 	<header>
 		<div class="container">
 			<h1 class="heading">Recommendation System for Books</h1>
-            <h2 class="hrading">Mini Project 2021</h2>
+            <h2 class="small-heading">Mini Project 2021</h2>
 
 		</div>
 	</header>
@@ -27,11 +27,18 @@
 	<div class="ml-container">
 
 		<form action="{{ url_for('predict')}}" method="POST">
+            <table>
+                <tr>
 			<p class=book_name>Write your Book Name!</p>
-			<input type="text" name="message" id="bookname" placeholder="Enter Book Name">
+        </tr>
+        <tr>
+			<div class="bookname"><input type="text" name="message" id="bookname1" placeholder="Write Here......"></div>
+        </tr>
 			<br />
+            <tr>
 
 			<input type="submit" class="btn-info" value="Predict">
+        </tr>
 			<br>
 			<br>
 			<div class=output>
@@ -49,7 +56,7 @@
 				<br>
 				{{ prediction_text5 }}
 			</div>
-
+            </table>
 		</form>
 		
 	</div>
