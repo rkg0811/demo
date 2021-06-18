@@ -19,6 +19,7 @@
 	<header>
 		<div class="container">
 			<h1 class="heading">Recommendation System for Books</h1>
+            <h2 class="hrading">Mini Project 2021</h2>
 
 		</div>
 	</header>
@@ -27,7 +28,7 @@
 
 		<form action="{{ url_for('predict')}}" method="POST">
 			<p class=book_name>Write your Book Name!</p>
-			<textarea name="message" rows="2" cols="50"></textarea>
+			<input type="text" name="message" id="bookname" placeholder="Enter Book Name">
 			<br />
 
 			<input type="submit" class="btn-info" value="Predict">
