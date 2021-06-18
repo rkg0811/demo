@@ -63,7 +63,7 @@ model = pickle.load(open('model_train.pkl', 'rb'))
 @app.route('/')
 def hello_world():
     return render_template("login.html")
-database={'nachi':'123','james':'aac','karthik':'asdsf'}
+database={'admin':'123','rishav':'rkg','gupta':'gpt','sample':'abc'}
 
 @app.route('/form_login',methods=['POST','GET'])
 def login():
