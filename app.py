@@ -1,5 +1,9 @@
 import pandas as pd
 import numpy as np
+import pickle
+from scipy.sparse import csr_matrix
+from sklearn.neighbors import NearestNeighbors
+from flask import Flask, request, jsonify, render_template
 
 book= pd.read_csv("Book-Ratings.csv",sep=';', error_bad_lines=False, encoding="latin-1",low_memory=False)
 book_isbn=pd.read_csv("Books.csv",sep=';', error_bad_lines=False, encoding="latin-1",low_memory=False)
@@ -25,21 +29,16 @@ data1.rename(columns = {'Book-Rating':'totalratings'}, inplace = True)
 threshold = 50
 data1 = data1.query('totalratings >= @threshold')
 
-from scipy.sparse import csr_matrix
 data1 = data1.drop_duplicates(['userid', 'booktitle'])
 data_pivot = data1.pivot(index = 'booktitle', columns = 'userid', values = 'bookrating').fillna(0)
 data1_mat = csr_matrix(data_pivot.values)
 
 # kNN Model
-from sklearn.neighbors import NearestNeighbors
 
 model_knn = NearestNeighbors(metric = 'cosine', algorithm = 'brute')
 model_knn.fit(data1_mat)
 
-import pickle
 pickle.dump(model_knn,open('model_train.pkl','wb'))
-
-from flask import Flask, request, jsonify, render_template
 
 books_list=list(data_pivot.index)
 
@@ -48,6 +47,7 @@ with open("book_list.txt", "wb") as fp:
 
 def get_index(req):
   count=0
+  req=req.lower()
   for i in books_list:
     count+=1
     alpha=i.lower()
