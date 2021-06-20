@@ -10,7 +10,7 @@ img{
   left: 0;
   top: 0;
   width: 100%;
-  height: auto; 
+  height: 100%; 
   z-index: -1; 
 }
 
@@ -30,6 +30,7 @@ img{
 
 .ml-container{
     text-align: center;
+    margin-right: 20px;
 }
 
 .book_name{
@@ -113,4 +114,11 @@ footer {
 .ml-container h2{
     margin-top: 40px;
 
+}
+
+#booklist{
+    display: flex;
+    float: right;
+    border:2px solid black;
+    margin-top: 40px;
 }

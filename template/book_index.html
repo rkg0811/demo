@@ -23,7 +23,11 @@
 
 		</div>
 	</header>
-
+	<textarea id="booklist" name="booklist_review" rows="25" cols="55">   
+   {% for line in content %}
+      {{ line }}
+   {% endfor %}
+</textarea>
 	<div class="ml-container">
 
 		<form action="{{ url_for('predict')}}" method="POST">

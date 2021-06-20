@@ -76,10 +76,16 @@ def login():
         if database[name1]!=pwd:
             return render_template('login.html',info='Invalid Password')
         else:
-	         return render_template('book_index.html',name=name1)
+            with open("finalbookname.txt","r") as file:
+              content = file.readlines()
+              print(content)
+            return render_template('book_index.html',name=name1,content=content)
 
 @app.route('/predict',methods=['POST'])
 def predict():
+  with open("finalbookname.txt","r") as file:
+              content = file.readlines()
+              print(content)
   if request.method == 'POST':
     message = str(request.form['message'])
     inp=str(message)
@@ -89,14 +95,17 @@ def predict():
       Listofbooks=[]
       for i in range(0, len(distances.flatten())):
         Listofbooks.append(data_pivot.index[indices.flatten()[i]])
-      return render_template('book_index.html',prediction_text = 'Recommended Books for: {}'.format(Listofbooks[0]),
+      return render_template('book_index.html',content=content,prediction_text = 'Recommended Books for: {}'.format(Listofbooks[0]),
                              prediction_text1 = '1]  {}'.format(Listofbooks[1]),
                              prediction_text2 = '2]  {}'.format(Listofbooks[2]),
                              prediction_text3 = '3]  {}'.format(Listofbooks[3]),
                              prediction_text4 = '4]  {}'.format(Listofbooks[4]),
                              prediction_text5 = '5]  {}'.format(Listofbooks[5]))
     elif bool(ind)== False:
-      return render_template('book_index.html',prediction_text = 'Sorry!! We Do not have that book in our Dataset')
+      with open("finalbookname.txt","r") as file:
+              content = file.readlines()
+              print(content)
+      return render_template('book_index.html',content=content,prediction_text = 'Sorry!! We Do not have that book in our Dataset')
 
 if __name__ == "__main__":
   app.run()
